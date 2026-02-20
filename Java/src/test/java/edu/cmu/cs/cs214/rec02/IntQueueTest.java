@@ -52,20 +52,23 @@ public class IntQueueTest {
 
     @Test
     public void testNotEmpty() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(testList.get(0));
+        assertFalse(mQueue.isEmpty());
     }
 
     @Test
     public void testPeekEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        assertNull(mQueue.peek());
+        assertEquals(0, mQueue.size());
     }
 
     @Test
     public void testPeekNoEmptyQueue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        mQueue.enqueue(testList.get(0));
+        mQueue.enqueue(testList.get(1));
+
+        assertEquals(testList.get(0), mQueue.peek());
+        assertEquals(2, mQueue.size());
     }
 
     @Test
@@ -80,8 +83,33 @@ public class IntQueueTest {
 
     @Test
     public void testDequeue() {
-        // TODO: write your own unit test
-        fail("Test not implemented");
+        assertNull(mQueue.dequeue());
+
+        for (Integer value : testList) {
+            mQueue.enqueue(value);
+        }
+
+        for (int i = 0; i < testList.size(); i++) {
+            assertEquals(testList.get(i), mQueue.dequeue());
+            assertEquals(testList.size() - i - 1, mQueue.size());
+        }
+
+        assertTrue(mQueue.isEmpty());
+        assertNull(mQueue.dequeue());
+    }
+
+    @Test
+    public void testClear() {
+        for (Integer value : testList) {
+            mQueue.enqueue(value);
+        }
+
+        mQueue.clear();
+
+        assertTrue(mQueue.isEmpty());
+        assertEquals(0, mQueue.size());
+        assertNull(mQueue.peek());
+        assertNull(mQueue.dequeue());
     }
 
     @Test
